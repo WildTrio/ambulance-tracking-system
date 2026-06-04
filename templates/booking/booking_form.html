@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container content-section">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <div class="form-card">
+                <div class="form-card-header">
+                    <span class="page-kicker"><i class="bi bi-calendar-plus me-2"></i>Ambulance Booking</span>
+                    <h1>Confirm Emergency Transport</h1>
+                    <p>Provide pickup, destination, contact, and emergency details for the selected ambulance.</p>
+                </div>
+
+                <div class="selected-ambulance mb-4">
+                    <div class="selected-icon"><i class="bi bi-truck-front"></i></div>
+                    <div>
+                        <span>Selected Vehicle</span>
+                        <strong>{{ ambulance.vehicle_number }}</strong>
+                    </div>
+                    <span class="badge bg-success-subtle text-success ms-auto">{{ ambulance.status }}</span>
+                </div>
+
+                {% if form.errors %}
+                <div class="alert alert-danger d-flex gap-2" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <div>Please correct the highlighted fields and submit again.</div>
+                </div>
+                {% endif %}
+
+                <form method="POST" class="styled-form">
+
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <button class="btn btn-success btn-lg w-100">
+                        <i class="bi bi-check2-circle me-2"></i>Confirm Booking
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

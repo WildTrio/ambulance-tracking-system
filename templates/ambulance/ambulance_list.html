@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container content-section">
+    <div class="page-header">
+        <div>
+            <span class="page-kicker"><i class="bi bi-truck-front me-2"></i>Fleet Availability</span>
+            <h1>Available Ambulances</h1>
+            <p>Review available emergency vehicles and start a booking request.</p>
+        </div>
+        <a href="{% url 'nearest_ambulances' %}" class="btn btn-success">
+            <i class="bi bi-crosshair me-2"></i>Find Nearest
+        </a>
+    </div>
+
+    <div class="filter-card mb-4">
+        <div class="row g-3 align-items-center">
+            <div class="col-lg-8">
+                <label for="ambulanceSearch" class="form-label">Search ambulances</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="search" id="ambulanceSearch" class="form-control"
+                           placeholder="Search by vehicle number, driver, type, or status">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="filter-summary">
+                    <i class="bi bi-check2-circle"></i>
+                    <span>{{ ambulances|length }} available now</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4" id="ambulanceGrid">
+        {% for ambulance in ambulances %}
+
+        <div class="col-md-6 col-xl-4 ambulance-card-wrap"
+             data-search="{{ ambulance.vehicle_number }} {{ ambulance.driver_name }} {{ ambulance.ambulance_type }} {{ ambulance.status }}">
+            <div class="resource-card ambulance-card h-100">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                    <div>
+                        <span class="resource-label">Vehicle Number</span>
+                        <h2>{{ ambulance.vehicle_number }}</h2>
+                    </div>
+                    {% if ambulance.status == "Available" %}
+                        <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle">
+                            {{ ambulance.status }}
+                        </span>
+                    {% elif ambulance.status == "Booked" %}
+                        <span class="badge rounded-pill bg-danger-subtle text-danger border border-danger-subtle">
+                            {{ ambulance.status }}
+                        </span>
+                    {% else %}
+                        <span class="badge rounded-pill text-bg-secondary">
+                            {{ ambulance.status }}
+                        </span>
+                    {% endif %}
+                </div>
+
+                <div class="resource-meta">
+                    <div>
+                        <i class="bi bi-person-badge"></i>
+                        <span>Driver</span>
+                        <strong>{{ ambulance.driver_name }}</strong>
+                    </div>
+                    <div>
+                        <i class="bi bi-heart-pulse"></i>
+                        <span>Ambulance Type</span>
+                        <strong>{{ ambulance.ambulance_type }}</strong>
+                    </div>
+                </div>
+
+                <a href="{% url 'book_ambulance' ambulance.id %}" class="btn btn-primary w-100 mt-4">
+                    <i class="bi bi-calendar-plus me-2"></i>Book Ambulance
+                </a>
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col-12">
+            <div class="empty-state">
+                <i class="bi bi-exclamation-triangle"></i>
+                <h2>No ambulances available</h2>
+                <p>Please check the live map or try again later.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+const ambulanceSearch = document.getElementById('ambulanceSearch');
+const ambulanceCards = document.querySelectorAll('.ambulance-card-wrap');
+
+if (ambulanceSearch) {
+    ambulanceSearch.addEventListener('input', function () {
+        const query = this.value.toLowerCase().trim();
+
+        ambulanceCards.forEach(function (card) {
+            const matches = card.dataset.search.toLowerCase().includes(query);
+            card.classList.toggle('d-none', !matches);
+        });
+    });
+}
+</script>
+
+{% endblock %}

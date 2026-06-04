@@ -1,0 +1,442 @@
+:root {
+    --primary: #0d6efd;
+    --success: #198754;
+    --danger: #dc3545;
+    --light-bg: #f8f9fa;
+    --ink: #172033;
+    --muted: #6c757d;
+    --border: #e6eaf0;
+    --body-bg: #f8f9fa;
+    --body-fg: #172033;
+    --body-quiet-color: #6c757d;
+    --body-medium-color: #445064;
+    --link-fg: #0d6efd;
+    --link-hover-color: #084298;
+    --header-bg: #0d6efd;
+    --header-color: #ffffff;
+    --breadcrumbs-bg: #ffffff;
+    --breadcrumbs-fg: #5c6675;
+    --selected-bg: rgba(13, 110, 253, 0.1);
+    --selected-row: rgba(13, 110, 253, 0.08);
+    --button-bg: #0d6efd;
+    --button-hover-bg: #0b5ed7;
+    --default-button-bg: #198754;
+    --default-button-hover-bg: #157347;
+    --delete-button-bg: #dc3545;
+    --delete-button-hover-bg: #bb2d3b;
+    --card-shadow: 0 14px 35px rgba(20, 32, 54, 0.1);
+}
+
+html,
+html[data-theme="light"],
+html[data-theme="dark"] {
+    color-scheme: light;
+    --body-bg: #f8f9fa;
+    --body-fg: #172033;
+    --body-quiet-color: #6c757d;
+    --body-medium-color: #445064;
+    --primary: #0d6efd;
+    --secondary: #198754;
+    --accent: #ffffff;
+    --link-fg: #0d6efd;
+    --link-hover-color: #084298;
+    --header-bg: #0d6efd;
+    --header-color: #ffffff;
+    --breadcrumbs-bg: #ffffff;
+    --breadcrumbs-fg: #5c6675;
+    --selected-bg: rgba(13, 110, 253, 0.1);
+    --selected-row: rgba(13, 110, 253, 0.08);
+    --darkened-bg: #ffffff;
+    --hairline-color: #e6eaf0;
+    --border-color: #e6eaf0;
+}
+
+* {
+    letter-spacing: 0;
+}
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(13, 110, 253, 0.08), transparent 30rem),
+        linear-gradient(180deg, #ffffff 0%, var(--light-bg) 42%, #ffffff 100%);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a:link,
+a:visited {
+    color: var(--primary);
+}
+
+a:hover,
+a:focus {
+    color: #084298;
+}
+
+#header {
+    min-height: 72px;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #0b5ed7 0%, #0d6efd 52%, #198754 100%);
+    box-shadow: 0 8px 22px rgba(13, 110, 253, 0.2);
+}
+
+.admin-branding {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.admin-brand-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    font-size: 1.55rem;
+}
+
+#site-name {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+#site-name a:link,
+#site-name a:visited {
+    color: #ffffff;
+}
+
+.admin-branding p {
+    margin: 0.18rem 0 0;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+#user-tools {
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.78rem;
+}
+
+#user-tools a,
+#logout-form button {
+    color: #ffffff;
+    border-bottom: 0;
+    font-weight: 800;
+}
+
+#logout-form button:hover,
+#user-tools a:hover {
+    color: #e7f1ff;
+}
+
+.admin-site-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: 1rem;
+    padding: 0.45rem 0.7rem;
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+div.breadcrumbs {
+    padding: 1rem 2rem;
+    color: var(--muted);
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 20px rgba(20, 32, 54, 0.04);
+}
+
+div.breadcrumbs a {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+#content {
+    padding: 2rem;
+}
+
+#content h1 {
+    color: var(--ink);
+    font-size: 1.85rem;
+    font-weight: 800;
+}
+
+.module,
+.inline-group,
+.submit-row,
+#changelist,
+#content-related {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.module h2,
+.module caption,
+.inline-group h2 {
+    padding: 0.9rem 1rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0d6efd, #198754);
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.dashboard .module table th,
+.dashboard .module table td {
+    padding: 0.8rem 1rem;
+}
+
+.dashboard .module table th a {
+    font-weight: 800;
+}
+
+.object-tools a:link,
+.object-tools a:visited,
+.object-tools button {
+    background: var(--success);
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+.object-tools a:hover,
+.object-tools button:hover {
+    background: #157347;
+}
+
+#changelist {
+    margin-top: 1rem;
+}
+
+#changelist #toolbar {
+    padding: 1rem;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+}
+
+#changelist #toolbar form input[type="text"],
+#changelist #toolbar form input[type="search"],
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+textarea,
+select,
+.vTextField {
+    min-height: 2.6rem;
+    color: var(--ink);
+    background: #ffffff;
+    border: 1px solid #d9e0ea;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.vTextField:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.14);
+    outline: none;
+}
+
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+    min-height: 2.4rem;
+    padding: 0.55rem 0.9rem;
+    background: var(--primary);
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover,
+a.button:hover {
+    background: #0b5ed7;
+}
+
+.submit-row input.default {
+    background: var(--success);
+}
+
+.submit-row input.default:hover {
+    background: #157347;
+}
+
+.deletelink,
+.deletelink:link,
+.deletelink:visited {
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+#changelist-filter {
+    top: 0;
+    background: #ffffff;
+    border-left: 1px solid var(--border);
+    border-radius: 0 8px 8px 0;
+    box-shadow: none;
+}
+
+#changelist-filter h2 {
+    color: var(--ink);
+    background: var(--light-bg);
+    font-weight: 800;
+}
+
+#changelist-filter h3 {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+#changelist-filter li.selected a {
+    color: var(--success) !important;
+    font-weight: 800;
+}
+
+#changelist table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead th {
+    color: #2b3545;
+    background: #f1f5f9;
+    border-bottom: 1px solid var(--border);
+    font-weight: 800;
+}
+
+thead th a:link,
+thead th a:visited {
+    color: #2b3545;
+}
+
+tbody tr {
+    transition: background 0.18s ease;
+}
+
+tbody tr:hover {
+    background: rgba(13, 110, 253, 0.06);
+}
+
+td,
+th {
+    border-bottom: 1px solid var(--border);
+}
+
+tbody tr,
+tbody tr:nth-child(odd),
+tbody tr:nth-child(even),
+.row1,
+.row2 {
+    background: #ffffff;
+}
+
+.paginator {
+    padding: 0.9rem 1rem;
+    color: var(--muted);
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+}
+
+.form-row {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.aligned label {
+    color: #2b3545;
+    font-weight: 800;
+}
+
+.help,
+p.help,
+form p.help,
+div.help,
+form div.help,
+div.help li {
+    color: var(--muted);
+}
+
+.errornote,
+ul.errorlist li {
+    background: rgba(220, 53, 69, 0.08);
+    border: 1px solid rgba(220, 53, 69, 0.18);
+    border-radius: 8px;
+}
+
+.messagelist li {
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.login #container {
+    width: min(94vw, 440px);
+    margin-top: 8vh;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.login #header {
+    justify-content: center;
+    min-height: auto;
+}
+
+.login #content {
+    padding: 2rem;
+}
+
+.login .form-row {
+    padding: 0 0 1rem;
+    border: 0;
+}
+
+.login .submit-row {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+@media (max-width: 767.98px) {
+    #header {
+        align-items: flex-start;
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    .admin-branding {
+        align-items: flex-start;
+    }
+
+    #content,
+    div.breadcrumbs {
+        padding: 1rem;
+    }
+
+    .admin-site-link {
+        margin: 0.75rem 0 0;
+    }
+
+    #changelist-filter {
+        border-left: 0;
+        border-top: 1px solid var(--border);
+        border-radius: 0;
+    }
+}

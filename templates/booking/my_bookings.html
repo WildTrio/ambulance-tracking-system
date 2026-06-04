@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container content-section">
+    <div class="page-header">
+        <div>
+            <span class="page-kicker"><i class="bi bi-calendar2-check me-2"></i>Booking History</span>
+            <h1>My Bookings</h1>
+            <p>Track ambulance requests and monitor current status updates.</p>
+        </div>
+        <a href="{% url 'ambulance_list' %}" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>New Booking
+        </a>
+    </div>
+
+    <div class="row g-4">
+        {% for booking in bookings %}
+
+        <div class="col-lg-6">
+            <div class="resource-card booking-card h-100">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                    <div>
+                        <span class="resource-label">Ambulance Number</span>
+                        <h2>{{ booking.ambulance.vehicle_number }}</h2>
+                        <p class="mb-0 text-muted">{{ booking.ambulance.ambulance_type }}</p>
+                    </div>
+
+                    {% if booking.status == "Pending" %}
+                        <span class="badge rounded-pill bg-warning text-dark">Pending</span>
+                    {% elif booking.status == "Accepted" %}
+                        <span class="badge rounded-pill bg-primary">Accepted</span>
+                    {% elif booking.status == "On The Way" %}
+                        <span class="badge rounded-pill bg-info text-dark">On The Way</span>
+                    {% elif booking.status == "Completed" %}
+                        <span class="badge rounded-pill bg-success">Completed</span>
+                    {% elif booking.status == "Cancelled" %}
+                        <span class="badge rounded-pill bg-danger">Cancelled</span>
+                    {% endif %}
+                </div>
+
+                <div class="booking-route">
+                    <div>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Pickup Location</span>
+                        <strong>{{ booking.pickup_location }}</strong>
+                    </div>
+                    <div>
+                        <i class="bi bi-flag-fill"></i>
+                        <span>Destination</span>
+                        <strong>{{ booking.destination }}</strong>
+                    </div>
+                </div>
+
+                <div class="booking-description">
+                    <span>Emergency Description</span>
+                    <p>{{ booking.emergency_description }}</p>
+                </div>
+
+                <div class="booking-date">
+                    <i class="bi bi-clock-history me-2"></i>
+                    {{ booking.created_at|date:"d M Y H:i" }}
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col-12">
+            <div class="empty-state">
+                <i class="bi bi-calendar-x"></i>
+                <h2>No bookings found</h2>
+                <p>Your ambulance booking requests will appear here.</p>
+                <a href="{% url 'ambulance_list' %}" class="btn btn-primary">
+                    <i class="bi bi-truck-front me-2"></i>View Ambulances
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

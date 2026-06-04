@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container content-section">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <div class="location-card text-center">
+                <div class="location-icon">
+                    <i class="bi bi-crosshair"></i>
+                </div>
+                <span class="page-kicker justify-content-center">Location Finder</span>
+                <h1>Find Nearest Ambulances</h1>
+                <p>
+                    Share your current location to calculate distance from available ambulances and show the closest options first.
+                </p>
+
+                <button onclick="getLocation()" class="btn btn-primary btn-lg">
+                    <i class="bi bi-geo-alt-fill me-2"></i>Find Nearby Ambulances
+                </button>
+
+                <a href="{% url 'ambulance_map' %}" class="btn btn-outline-primary btn-lg ms-sm-2 mt-3 mt-sm-0">
+                    <i class="bi bi-map me-2"></i>Open Map
+                </a>
+
+                <div class="location-note">
+                    <i class="bi bi-lock-fill"></i>
+                    Browser location permission is used only to calculate nearby ambulance results.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="locationForm" method="POST" action="/ambulances-nearby/">
+
+        {% csrf_token %}
+
+        <input type="hidden" id="latitude" name="latitude">
+
+        <input type="hidden" id="longitude" name="longitude">
+
+    </form>
+</div>
+
+<script>
+
+function getLocation(){
+
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by this browser.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            alert(
+                "Location Found!\n" +
+                position.coords.latitude +
+                ", " +
+                position.coords.longitude
+            );
+
+            document.getElementById('latitude').value =
+                position.coords.latitude;
+
+            document.getElementById('longitude').value =
+                position.coords.longitude;
+
+            document.getElementById('locationForm').submit();
+        },
+
+        function(error){
+
+            alert(
+                "Location Error: " +
+                error.message
+            );
+
+        }
+
+    );
+
+}
+
+</script>
+
+{% endblock %}

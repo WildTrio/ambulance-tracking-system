@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8">
+                <span class="hero-kicker"><i class="bi bi-heart-pulse-fill me-2"></i>Emergency Medical Response</span>
+                <h1 class="hero-title">Fast ambulance discovery, booking, and live location awareness.</h1>
+                <p class="hero-subtitle">
+                    Track available ambulances, book emergency transport, and locate the nearest response vehicle from a single dashboard.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3">
+                    <a href="{% url 'ambulance_list' %}" class="btn btn-light btn-lg hero-btn">
+                        <i class="bi bi-truck-front me-2"></i>View Ambulances
+                    </a>
+                    <a href="{% url 'nearest_ambulances' %}" class="btn btn-success btn-lg hero-btn">
+                        <i class="bi bi-crosshair me-2"></i>Find Nearest
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="hero-callout">
+                    <i class="bi bi-shield-plus"></i>
+                    <div>
+                        <span>Emergency Helpline</span>
+                        <strong>108</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container content-section">
+
+    <div class="row g-4 stats-grid">
+        <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon primary"><i class="bi bi-hospital"></i></div>
+                <div>
+                    <span>Total Ambulances</span>
+                    <strong>{{ total_ambulances }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon success"><i class="bi bi-check2-circle"></i></div>
+                <div>
+                    <span>Available Ambulances</span>
+                    <strong>{{ available_ambulances }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon danger"><i class="bi bi-activity"></i></div>
+                <div>
+                    <span>Booked Ambulances</span>
+                    <strong>{{ booked_ambulances }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon info"><i class="bi bi-calendar2-check"></i></div>
+                <div>
+                    <span>Total Bookings</span>
+                    <strong>{{ total_bookings }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="emergency-banner">
+        <div>
+            <span class="badge text-bg-danger mb-2">Emergency Ready</span>
+            <h2>Need urgent help?</h2>
+            <p>Use nearest ambulance search for location-based results or open the live map for a wider operational view.</p>
+        </div>
+        <a href="{% url 'ambulance_map' %}" class="btn btn-outline-light">
+            <i class="bi bi-map me-2"></i>Open Map
+        </a>
+    </section>
+
+    <section class="section-block">
+        <div class="section-heading">
+            <span>Core Services</span>
+            <h2>Designed for quick emergency coordination</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <h3>Location Search</h3>
+                    <p>Find nearby available ambulances using the browser's secure geolocation support.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-clipboard2-pulse"></i>
+                    <h3>Managed Bookings</h3>
+                    <p>Submit emergency details and follow booking status updates from your account.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-map-fill"></i>
+                    <h3>Map Visibility</h3>
+                    <p>View ambulance positions on a responsive OpenStreetMap interface powered by Leaflet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

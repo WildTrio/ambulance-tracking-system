@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="container content-section">
+
+    <div class="page-header">
+        <div>
+            <span class="page-kicker"><i class="bi bi-map me-2"></i>Live Map View</span>
+            <h1>Ambulance Locations Map</h1>
+            <p>Explore ambulance positions and compare them against your current location.</p>
+        </div>
+        <a href="{% url 'ambulance_list' %}" class="btn btn-primary">
+            <i class="bi bi-truck-front me-2"></i>View Available
+        </a>
+    </div>
+
+    <div class="map-card">
+        <div class="map-toolbar">
+            <div>
+                <strong>OpenStreetMap Fleet View</strong>
+                <span>Location permission improves centering accuracy.</span>
+            </div>
+            <div class="map-legend">
+                <span><i class="legend-dot user-dot"></i>User Location</span>
+                <span><i class="legend-dot ambulance-dot"></i>Ambulance Locations</span>
+            </div>
+        </div>
+
+        <div id="map" class="map-container"></div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+{{ ambulances|json_script:"ambulance-data" }}
+<script>
+
+const ambulanceData = JSON.parse(
+    document.getElementById('ambulance-data').textContent
+);
+
+const ambulanceIcon = L.divIcon({
+    className: 'ambulance-map-marker',
+    html: '<i class="bi bi-truck-front-fill"></i>',
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+    popupAnchor: [0, -18]
+});
+
+const userIcon = L.divIcon({
+    className: 'user-map-marker',
+    html: '<i class="bi bi-geo-alt-fill"></i>',
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+    popupAnchor: [0, -18]
+});
+
+function addAmbulanceMarkers(map) {
+    ambulanceData.forEach(function(ambulance){
+
+        L.marker(
+            [
+                ambulance.lat,
+                ambulance.lng
+            ],
+            {
+                icon: ambulanceIcon
+            }
+        )
+        .addTo(map)
+        .bindPopup(
+            "<b>🚑 " +
+            ambulance.vehicle +
+            "</b><br>" +
+            "Type: " +
+            ambulance.type +
+            "<br>" +
+            "Status: " +
+            ambulance.status
+        );
+
+    });
+}
+
+function addTiles(map) {
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            attribution:
+            '&copy; OpenStreetMap contributors'
+        }
+    ).addTo(map);
+}
+
+navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
+
+        const map = L.map('map').setView(
+            [userLat, userLng],
+            12
+        );
+
+        addTiles(map);
+
+        L.marker([userLat, userLng], { icon: userIcon })
+            .addTo(map)
+            .bindPopup("📍 Your Location")
+            .openPopup();
+
+        addAmbulanceMarkers(map);
+
+    },
+
+    function(error){
+
+        const map = L.map('map').setView(
+            [23.2599, 77.4126],
+            11
+        );
+
+        addTiles(map);
+
+        addAmbulanceMarkers(map);
+
+    }
+
+);
+
+</script>
+
+{% endblock %}
