@@ -28,9 +28,6 @@ def book_ambulance(request, ambulance_id):
 
             booking.save()
 
-            ambulance.status = "Booked"
-            ambulance.save()
-
             return redirect('my_bookings')
 
     else:
