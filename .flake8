@@ -1,0 +1,11 @@
+[flake8]
+exclude =
+    migrations,
+    venv,
+    .venv
+
+max-line-length = 120
+
+ignore =
+    E501,
+    W292
