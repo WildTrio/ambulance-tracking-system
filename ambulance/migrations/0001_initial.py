@@ -7,21 +7,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Ambulance',
+            name="Ambulance",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('vehicle_number', models.CharField(max_length=20)),
-                ('driver_name', models.CharField(max_length=100)),
-                ('driver_phone', models.CharField(max_length=15)),
-                ('ambulance_type', models.CharField(max_length=50)),
-                ('latitude', models.FloatField()),
-                ('longitude', models.FloatField()),
-                ('status', models.CharField(default='Available', max_length=20)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("vehicle_number", models.CharField(max_length=20)),
+                ("driver_name", models.CharField(max_length=100)),
+                ("driver_phone", models.CharField(max_length=15)),
+                ("ambulance_type", models.CharField(max_length=50)),
+                ("latitude", models.FloatField()),
+                ("longitude", models.FloatField()),
+                ("status", models.CharField(default="Available", max_length=20)),
             ],
         ),
     ]

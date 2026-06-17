@@ -6,24 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('booking', '0001_initial'),
+        ("booking", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='booking',
-            name='emergency_description',
-            field=models.TextField(default='Not Provided'),
+            model_name="booking",
+            name="emergency_description",
+            field=models.TextField(default="Not Provided"),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='booking',
-            name='destination',
+            model_name="booking",
+            name="destination",
             field=models.CharField(max_length=255),
         ),
         migrations.AlterField(
-            model_name='booking',
-            name='pickup_location',
+            model_name="booking",
+            name="pickup_location",
             field=models.CharField(max_length=255),
         ),
     ]

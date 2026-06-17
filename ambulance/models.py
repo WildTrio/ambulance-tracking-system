@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Ambulance(models.Model):
     vehicle_number = models.CharField(max_length=20)
 
@@ -13,10 +14,7 @@ class Ambulance(models.Model):
 
     longitude = models.FloatField()
 
-    status = models.CharField(
-        max_length=20,
-        default='Available'
-    )
+    status = models.CharField(max_length=20, default="Available")
 
     def __str__(self):
         return self.vehicle_number

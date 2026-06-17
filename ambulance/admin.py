@@ -23,6 +23,4 @@ class AmbulanceAdmin(admin.ModelAdmin):
         "driver_phone",
         "ambulance_type",
     )
-    ordering = (
-        "vehicle_number",
-    )
+    ordering = ("vehicle_number",)

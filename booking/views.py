@@ -9,10 +9,7 @@ from ambulance.models import Ambulance
 @login_required
 def book_ambulance(request, ambulance_id):
 
-    ambulance = get_object_or_404(
-        Ambulance,
-        id=ambulance_id
-    )
+    ambulance = get_object_or_404(Ambulance, id=ambulance_id)
 
     if request.method == "POST":
 
@@ -28,32 +25,19 @@ def book_ambulance(request, ambulance_id):
 
             booking.save()
 
-            return redirect('my_bookings')
+            return redirect("my_bookings")
 
     else:
         form = BookingForm()
 
     return render(
-        request,
-        'booking/booking_form.html',
-        {
-            'form': form,
-            'ambulance': ambulance
-        }
+        request, "booking/booking_form.html", {"form": form, "ambulance": ambulance}
     )
 
 
 @login_required
 def my_bookings(request):
 
-    bookings = Booking.objects.filter(
-        user=request.user
-    ).order_by('-created_at')
+    bookings = Booking.objects.filter(user=request.user).order_by("-created_at")
 
-    return render(
-        request,
-        'booking/my_bookings.html',
-        {
-            'bookings': bookings
-        }
-    )
+    return render(request, "booking/my_bookings.html", {"bookings": bookings})

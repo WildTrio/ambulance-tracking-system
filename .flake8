@@ -8,4 +8,6 @@ max-line-length = 120
 
 ignore =
     E501,
-    W292
+    W292,
+    W503,
+    W504

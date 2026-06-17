@@ -26,10 +26,6 @@ class BookingAdmin(admin.ModelAdmin):
         "contact_number",
         "emergency_description",
     )
-    readonly_fields = (
-        "created_at",
-    )
+    readonly_fields = ("created_at",)
     date_hierarchy = "created_at"
-    ordering = (
-        "-created_at",
-    )
+    ordering = ("-created_at",)
